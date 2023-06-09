@@ -23,12 +23,12 @@ const Detail = () => {
         <div>
 
 
-            <div className="container main-news">
+
                             <Header></Header>
 
                             <ContentDetail url={url} />
 
-            </div>
+
         </div>
     );
 }
