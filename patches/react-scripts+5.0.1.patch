@@ -1,0 +1,17 @@
+diff --git a/node_modules/react-scripts/config/webpack.config.js b/node_modules/react-scripts/config/webpack.config.js
+index e465d8e..0404bb4 100644
+--- a/node_modules/react-scripts/config/webpack.config.js
++++ b/node_modules/react-scripts/config/webpack.config.js
+@@ -303,6 +303,12 @@ module.exports = function (webpackEnv) {
+       ],
+     },
+     resolve: {
++
++      fallback: {
++        http: require.resolve('stream-http'),
++        https: require.resolve('https-browserify'),
++        timers: require.resolve('timers-browserify'),
++      },
+       // This allows you to set a fallback for where webpack should look for modules.
+       // We placed these paths second because we want `node_modules` to "win"
+       // if there are any conflicts. This matches Node resolution mechanism.
