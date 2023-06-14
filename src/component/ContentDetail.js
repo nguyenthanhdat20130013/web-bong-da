@@ -12,36 +12,39 @@ import "../Template/vendor/animate/animate.css"
 import "../Template/vendor/css-hamburgers/hamburgers.min.css"
 import "../Template/css/util.min.css"
 import "../Template/css/main.css"
+import RelatedArticles from "./RelatedArticles";
 
 const ContentDetail = ({ url }) => {
     const [articleTitle, setArticleTitle] = useState('');
     const [articleDescription, setArticleDescription] = useState('');
     const [articleContent, setArticleContent] = useState('');
     const [publishDate, setPublishDate] = useState('');
-
+    const [relation, setRelation] = useState('');
     useEffect(() => {
         const getContent = async () => {
             try {
                 const response = await fetch('https://cors-anywhere.herokuapp.com/' + url);
                 const html = await response.text();
                 const $ = cheerio.load(html);
-
                 // Lấy tiêu đề bài viết
                 const title = $('h1').text()
                 setArticleTitle(title);
-
                 // Lấy mô tả bài viết
                 const description = $('.sapo_detail ').text();
-                setArticleDescription(description);
-
+                const cleanedDescription = description.replace('BongDa.com.vn', '');
+                setArticleDescription(cleanedDescription);
+                //Lấy bài viết tương tự
+                const rela = $('.new_relation_top').html();
+                setRelation(rela);
                 // Lấy nội dung bài viết
                 const content = $('#content_detail');
+                content.find('div.new_relation_top.pkg.in-article-related-news').remove();
                 setArticleContent(content);
-
-                // Lấy ngày đăng bài viết
+                //Lấy ngày đăng bài viết
                 const publishDate = $('.text-right').text();
+                const cleanedPublishDate = publishDate.replace('Copy Link', '');
+                setPublishDate(cleanedPublishDate);
 
-                setPublishDate(publishDate);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -52,19 +55,6 @@ const ContentDetail = ({ url }) => {
 
 
     return (
-        // <div>
-        //         <Link to="/trang-chu">Trang chủ</Link>
-        //
-        //         <h1 style={{
-        //             fontSize: '36px',
-        //
-        //         }}>{articleTitle}</h1>
-        //         <div>  {articleContent ? (
-        //             <div dangerouslySetInnerHTML={{__html: articleContent}}/>
-        //         ) : (
-        //             <div>Đang tải trang, chờ xíu....</div>
-        //         )}</div>
-        // </div>
         <div>
             <div className="container">
                 <div className="headline bg0 flex-wr-sb-c p-rl-20 p-tb-8">
@@ -220,109 +210,11 @@ const ContentDetail = ({ url }) => {
                                         </li>
                                     </ul>
                                 </div>
-
-
-
-
-
-                                <div className="p-b-30">
-                                    <div className="how2 how2-cl4 flex-s-c">
-                                        <h3 className="f1-m-2 cl3 tab01-title">
-                                            Bài đăng hot
-                                        </h3>
+                                {relation && (
+                                    <div>
+                                        <RelatedArticles relation={relation} />
                                     </div>
-
-                                    <ul className="p-t-35">
-                                        <li className="flex-wr-sb-s p-b-30">
-                                            <a href="#" className="size-w-10 wrap-pic-w hov1 trans-03">
-                                                <img src="images/popular-post-04.jpg" alt="IMG"/>
-                                            </a>
-
-                                            <div className="size-w-11">
-                                                <h6 className="p-b-4">
-                                                    <a href="blog-detail-02.html"
-                                                       className="f1-s-5 cl3 hov-cl10 trans-03">
-                                                        Donec metus orci, malesuada et lectus vitae
-                                                    </a>
-                                                </h6>
-
-                                                <span className="cl8 txt-center p-b-24">
-											<a href="#" className="f1-s-6 cl8 hov-cl10 trans-03">
-												Music
-											</a>
-
-											<span className="f1-s-3 m-rl-3">
-												-
-											</span>
-
-											<span className="f1-s-3">
-												Feb 18
-											</span>
-										</span>
-                                            </div>
-                                        </li>
-
-                                        <li className="flex-wr-sb-s p-b-30">
-                                            <a href="#" className="size-w-10 wrap-pic-w hov1 trans-03">
-                                                <img src="images/popular-post-05.jpg" alt="IMG"/>
-                                            </a>
-
-                                            <div className="size-w-11">
-                                                <h6 className="p-b-4">
-                                                    <a href="blog-detail-02.html"
-                                                       className="f1-s-5 cl3 hov-cl10 trans-03">
-                                                        Donec metus orci, malesuada et lectus vitae
-                                                    </a>
-                                                </h6>
-
-                                                <span className="cl8 txt-center p-b-24">
-											<a href="#" className="f1-s-6 cl8 hov-cl10 trans-03">
-												Game
-											</a>
-
-											<span className="f1-s-3 m-rl-3">
-												-
-											</span>
-
-											<span className="f1-s-3">
-												Feb 16
-											</span>
-										</span>
-                                            </div>
-                                        </li>
-
-                                        <li className="flex-wr-sb-s p-b-30">
-                                            <a href="#" className="size-w-10 wrap-pic-w hov1 trans-03">
-                                                <img src="images/popular-post-06.jpg" alt="IMG"/>
-                                            </a>
-
-                                            <div className="size-w-11">
-                                                <h6 className="p-b-4">
-                                                    <a href="blog-detail-02.html"
-                                                       className="f1-s-5 cl3 hov-cl10 trans-03">
-                                                        Donec metus orci, malesuada et lectus vitae
-                                                    </a>
-                                                </h6>
-
-                                                <span className="cl8 txt-center p-b-24">
-											<a href="#" className="f1-s-6 cl8 hov-cl10 trans-03">
-												Celebrity
-											</a>
-
-											<span className="f1-s-3 m-rl-3">
-												-
-											</span>
-
-											<span className="f1-s-3">
-												Feb 12
-											</span>
-										</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-
-
+                                )}
                                 <div>
                                     <div className="how2 how2-cl4 flex-s-c m-b-30">
                                         <h3 className="f1-m-2 cl3 tab01-title">

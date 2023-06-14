@@ -101,10 +101,6 @@ export function Home(props){
                    href={`detail?url=${encodeURIComponent(rssHome[0].link)}`} className="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
                     {rssHome[0].description}
                 </a>
-
-
-                                                {/*<span className="f1-s-3 cl11 m-rl-3">-</span>
-                        <span className="f1-s-3 cl11">Feb 16</span>*/}
               </span>
                                         </div>
                                     </div>
