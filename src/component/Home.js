@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import "../Template/images/icons/favicon.png"
 import "../Template/fonts/font-awesome-4.7.0/css/font-awesome.min.css"
 import "../Template/fonts/fontawesome-5.0.8/css/fontawesome-all.min.css"
@@ -8,8 +8,9 @@ import "../Template/vendor/css-hamburgers/hamburgers.min.css"
 import "../Template/css/util.min.css"
 import "../Template/css/main.css"
 import Header from "../component/common/Header";
+import HomeCategory from "./HomeCategory";
 
-export function Home(props){
+export function Home(props) {
     const [rssHome, setRssHome] = useState([]);
 
     useEffect(() => {
@@ -27,7 +28,7 @@ export function Home(props){
                 rssItems.push({
                     title: item.querySelector("title").textContent,
                     description: item.querySelector("description").textContent,
-                    image : item.querySelector("image").textContent,
+                    image: item.querySelector("image").textContent,
                     link: item.querySelector("link").textContent,
                     pubDate: item.querySelector("pubDate").textContent,
                 });
@@ -37,13 +38,13 @@ export function Home(props){
         fetchData();
     }, [props.url]);
 
-    return(
+    return (
         <div>
 
 
             <title>Category Page v1</title>
-            <meta charSet="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <meta charSet="UTF-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
             <Header></Header>
 
@@ -66,7 +67,7 @@ export function Home(props){
                             placeholder="Search"
                         />
                         <button className="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
-                            <i className="zmdi zmdi-search" />
+                            <i className="zmdi zmdi-search"/>
                         </button>
                     </div>
                 </div>
@@ -82,23 +83,25 @@ export function Home(props){
                         <div className="col-md-6 p-rl-1 p-b-2">
                             {rssHome.length > 0 &&
                                 <>
-                                    <div className="bg-img1 size-a-3 how1 pos-relative" style={{ backgroundImage:  `url(${rssHome[0].image})` }}>
+                                    <div className="bg-img1 size-a-3 how1 pos-relative"
+                                         style={{backgroundImage: `url(${rssHome[0].image})`}}>
                                         <a
-                                         href={`detail?url=${encodeURIComponent(rssHome[0].link)}`}
+                                            href={`detail?url=${encodeURIComponent(rssHome[0].link)}`}
 
                                             className="dis-block how1-child1 trans-03"
                                         />
                                         <div className="flex-col-e-s s-full p-rl-25 p-tb-20">
-                                            <a style={{ zIndex: '3',fontSize : '23px' }}
-                                               href={`detail?url=${encodeURIComponent(rssHome[0].link)}`} className="how-txt1 size-a-6 f1-l-1 cl0 hov-cl10 trans-03">
+                                            <a style={{zIndex: '3', fontSize: '23px'}}
+                                               href={`detail?url=${encodeURIComponent(rssHome[0].link)}`}
+                                               className="how-txt1 size-a-6 f1-l-1 cl0 hov-cl10 trans-03">
                                                 {rssHome[0].title}
                                             </a>
 
-
                                             <span className="how1-child2">
                         <span className="f1-s-4 cl11">{rssHome[0].pubDate}</span>
-                <a style={{ opacity : '0.98'}}
-                   href={`detail?url=${encodeURIComponent(rssHome[0].link)}`} className="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
+                <a style={{opacity: '0.98'}}
+                   href={`detail?url=${encodeURIComponent(rssHome[0].link)}`}
+                   className="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
                     {rssHome[0].description}
                 </a>
 
@@ -118,7 +121,8 @@ export function Home(props){
                                     <>
                                         {rssHome.slice(1, 5).map((item, index) => (
                                             <div className="col-sm-6 p-rl-1 p-b-2" key={index}>
-                                                <div className="bg-img1 size-a-14 how1 pos-relative" style={{ backgroundImage:  `url(${item.image})` }}>
+                                                <div className="bg-img1 size-a-14 how1 pos-relative"
+                                                     style={{backgroundImage: `url(${item.image})`}}>
                                                     <a
                                                         href={`detail?url=${encodeURIComponent(item.link)}`}
                                                         className="dis-block how1-child1 trans-03"
@@ -157,342 +161,48 @@ export function Home(props){
                     <div className="row justify-content-center">
                         <div className="col-md-10 col-lg-8 p-b-80">
                             <div className="row">
-                                <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                                    {/* Item latest */}
-                                    <div className="m-b-45">
-                                        <a
-                                            href="blog-detail-01.html"
-                                            className="wrap-pic-w hov1 trans-03"
-                                        >
-                                            <img src="images/entertaiment-06.jpg" alt="IMG" />
-                                        </a>
-                                        <div className="p-t-16">
-                                            <h5 className="p-b-5">
-                                                <a
-                                                    href="blog-detail-01.html"
-                                                    className="f1-m-3 cl2 hov-cl10 trans-03"
-                                                >
-                                                    You wish lorem ipsum dolor sit amet consectetur
-                                                </a>
-                                            </h5>
-                                            <span className="cl8">
+                                {rssHome.length > 0 &&
+                                    <>
+                                        {rssHome.slice(5, 15).map((item, index) => (
+                                            <>
+                                                <div className="col-sm-6 p-r-25 p-r-15-sr991">
+                                                    {/* Item latest */}
+                                                    <div className="m-b-45">
+
+                                                        <a
+                                                            href={`detail?url=${encodeURIComponent(item.link)}`}
+                                                            className="wrap-pic-w hov1 trans-03"
+                                                        >
+                                                            <img src={item.image} alt="IMG"/>
+                                                        </a>
+
+                                                        <div className="p-t-16">
+                                                            <h5 className="p-b-5">
+                                                                <a
+                                                                    href={`detail?url=${encodeURIComponent(item.link)}`}
+                                                                    className="f1-m-3 cl2 hov-cl10 trans-03"
+                                                                >
+                                                                    {item.title}
+                                                                </a>
+                                                            </h5>
+                                                            <span className="cl8">
+
                     <a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-                      by John Alvarado
+                      {item.description}
                     </a>
                     <span className="f1-s-3 m-rl-3">-</span>
-                    <span className="f1-s-3">Feb 18</span>
+                                                    <span className="f1-s-3">{item.pubDate}</span>
                   </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                                    {/* Item latest */}
-                                    <div className="m-b-45">
-                                        <a
-                                            href="blog-detail-01.html"
-                                            className="wrap-pic-w hov1 trans-03"
-                                        >
-                                            <img src="images/entertaiment-07.jpg" alt="IMG" />
-                                        </a>
-                                        <div className="p-t-16">
-                                            <h5 className="p-b-5">
-                                                <a
-                                                    href="blog-detail-01.html"
-                                                    className="f1-m-3 cl2 hov-cl10 trans-03"
-                                                >
-                                                    You wish lorem ipsum dolor sit amet consectetur
-                                                </a>
-                                            </h5>
-                                            <span className="cl8">
-                    <a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-                      by John Alvarado
-                    </a>
-                    <span className="f1-s-3 m-rl-3">-</span>
-                    <span className="f1-s-3">Feb 16</span>
-                  </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                                    {/* Item latest */}
-                                    <div className="m-b-45">
-                                        <a
-                                            href="blog-detail-01.html"
-                                            className="wrap-pic-w hov1 trans-03"
-                                        >
-                                            <img src="images/entertaiment-08.jpg" alt="IMG" />
-                                        </a>
-                                        <div className="p-t-16">
-                                            <h5 className="p-b-5">
-                                                <a
-                                                    href="blog-detail-01.html"
-                                                    className="f1-m-3 cl2 hov-cl10 trans-03"
-                                                >
-                                                    You wish lorem ipsum dolor sit amet consectetur
-                                                </a>
-                                            </h5>
-                                            <span className="cl8">
-                    <a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-                      by John Alvarado
-                    </a>
-                    <span className="f1-s-3 m-rl-3">-</span>
-                    <span className="f1-s-3">Feb 15</span>
-                  </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                                    {/* Item latest */}
-                                    <div className="m-b-45">
-                                        <a
-                                            href="blog-detail-01.html"
-                                            className="wrap-pic-w hov1 trans-03"
-                                        >
-                                            <img src="images/entertaiment-09.jpg" alt="IMG" />
-                                        </a>
-                                        <div className="p-t-16">
-                                            <h5 className="p-b-5">
-                                                <a
-                                                    href="blog-detail-01.html"
-                                                    className="f1-m-3 cl2 hov-cl10 trans-03"
-                                                >
-                                                    You wish lorem ipsum dolor sit amet consectetur
-                                                </a>
-                                            </h5>
-                                            <span className="cl8">
-                    <a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-                      by John Alvarado
-                    </a>
-                    <span className="f1-s-3 m-rl-3">-</span>
-                    <span className="f1-s-3">Feb 13</span>
-                  </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                                    {/* Item latest */}
-                                    <div className="m-b-45">
-                                        <a
-                                            href="blog-detail-01.html"
-                                            className="wrap-pic-w hov1 trans-03"
-                                        >
-                                            <img src="images/latest-05.jpg" alt="IMG" />
-                                        </a>
-                                        <div className="p-t-16">
-                                            <h5 className="p-b-5">
-                                                <a
-                                                    href="blog-detail-01.html"
-                                                    className="f1-m-3 cl2 hov-cl10 trans-03"
-                                                >
-                                                    You wish lorem ipsum dolor sit amet consectetur
-                                                </a>
-                                            </h5>
-                                            <span className="cl8">
-                    <a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-                      by John Alvarado
-                    </a>
-                    <span className="f1-s-3 m-rl-3">-</span>
-                    <span className="f1-s-3">Feb 10</span>
-                  </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                                    {/* Item latest */}
-                                    <div className="m-b-45">
-                                        <a
-                                            href="blog-detail-01.html"
-                                            className="wrap-pic-w hov1 trans-03"
-                                        >
-                                            <img src="images/latest-06.jpg" alt="IMG" />
-                                        </a>
-                                        <div className="p-t-16">
-                                            <h5 className="p-b-5">
-                                                <a
-                                                    href="blog-detail-01.html"
-                                                    className="f1-m-3 cl2 hov-cl10 trans-03"
-                                                >
-                                                    You wish lorem ipsum dolor sit amet consectetur
-                                                </a>
-                                            </h5>
-                                            <span className="cl8">
-                    <a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-                      by John Alvarado
-                    </a>
-                    <span className="f1-s-3 m-rl-3">-</span>
-                    <span className="f1-s-3">Feb 09</span>
-                  </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                                    {/* Item latest */}
-                                    <div className="m-b-45">
-                                        <a
-                                            href="blog-detail-01.html"
-                                            className="wrap-pic-w hov1 trans-03"
-                                        >
-                                            <img src="images/entertaiment-10.jpg" alt="IMG" />
-                                        </a>
-                                        <div className="p-t-16">
-                                            <h5 className="p-b-5">
-                                                <a
-                                                    href="blog-detail-01.html"
-                                                    className="f1-m-3 cl2 hov-cl10 trans-03"
-                                                >
-                                                    You wish lorem ipsum dolor sit amet consectetur
-                                                </a>
-                                            </h5>
-                                            <span className="cl8">
-                    <a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-                      by John Alvarado
-                    </a>
-                    <span className="f1-s-3 m-rl-3">-</span>
-                    <span className="f1-s-3">Feb 18</span>
-                  </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                                    {/* Item latest */}
-                                    <div className="m-b-45">
-                                        <a
-                                            href="blog-detail-01.html"
-                                            className="wrap-pic-w hov1 trans-03"
-                                        >
-                                            <img src="images/entertaiment-11.jpg" alt="IMG" />
-                                        </a>
-                                        <div className="p-t-16">
-                                            <h5 className="p-b-5">
-                                                <a
-                                                    href="blog-detail-01.html"
-                                                    className="f1-m-3 cl2 hov-cl10 trans-03"
-                                                >
-                                                    You wish lorem ipsum dolor sit amet consectetur
-                                                </a>
-                                            </h5>
-                                            <span className="cl8">
-                    <a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-                      by John Alvarado
-                    </a>
-                    <span className="f1-s-3 m-rl-3">-</span>
-                    <span className="f1-s-3">Feb 16</span>
-                  </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                                    {/* Item latest */}
-                                    <div className="m-b-45">
-                                        <a
-                                            href="blog-detail-01.html"
-                                            className="wrap-pic-w hov1 trans-03"
-                                        >
-                                            <img src="images/entertaiment-12.jpg" alt="IMG" />
-                                        </a>
-                                        <div className="p-t-16">
-                                            <h5 className="p-b-5">
-                                                <a
-                                                    href="blog-detail-01.html"
-                                                    className="f1-m-3 cl2 hov-cl10 trans-03"
-                                                >
-                                                    You wish lorem ipsum dolor sit amet consectetur
-                                                </a>
-                                            </h5>
-                                            <span className="cl8">
-                    <a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-                      by John Alvarado
-                    </a>
-                    <span className="f1-s-3 m-rl-3">-</span>
-                    <span className="f1-s-3">Feb 15</span>
-                  </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                                    {/* Item latest */}
-                                    <div className="m-b-45">
-                                        <a
-                                            href="blog-detail-01.html"
-                                            className="wrap-pic-w hov1 trans-03"
-                                        >
-                                            <img src="images/entertaiment-13.jpg" alt="IMG" />
-                                        </a>
-                                        <div className="p-t-16">
-                                            <h5 className="p-b-5">
-                                                <a
-                                                    href="blog-detail-01.html"
-                                                    className="f1-m-3 cl2 hov-cl10 trans-03"
-                                                >
-                                                    You wish lorem ipsum dolor sit amet consectetur
-                                                </a>
-                                            </h5>
-                                            <span className="cl8">
-                    <a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-                      by John Alvarado
-                    </a>
-                    <span className="f1-s-3 m-rl-3">-</span>
-                    <span className="f1-s-3">Feb 13</span>
-                  </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                                    {/* Item latest */}
-                                    <div className="m-b-45">
-                                        <a
-                                            href="blog-detail-01.html"
-                                            className="wrap-pic-w hov1 trans-03"
-                                        >
-                                            <img src="images/entertaiment-14.jpg" alt="IMG" />
-                                        </a>
-                                        <div className="p-t-16">
-                                            <h5 className="p-b-5">
-                                                <a
-                                                    href="blog-detail-01.html"
-                                                    className="f1-m-3 cl2 hov-cl10 trans-03"
-                                                >
-                                                    You wish lorem ipsum dolor sit amet consectetur
-                                                </a>
-                                            </h5>
-                                            <span className="cl8">
-                    <a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-                      by John Alvarado
-                    </a>
-                    <span className="f1-s-3 m-rl-3">-</span>
-                    <span className="f1-s-3">Feb 10</span>
-                  </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                                    {/* Item latest */}
-                                    <div className="m-b-45">
-                                        <a
-                                            href="blog-detail-01.html"
-                                            className="wrap-pic-w hov1 trans-03"
-                                        >
-                                            <img src="images/entertaiment-15.jpg" alt="IMG" />
-                                        </a>
-                                        <div className="p-t-16">
-                                            <h5 className="p-b-5">
-                                                <a
-                                                    href="blog-detail-01.html"
-                                                    className="f1-m-3 cl2 hov-cl10 trans-03"
-                                                >
-                                                    You wish lorem ipsum dolor sit amet consectetur
-                                                </a>
-                                            </h5>
-                                            <span className="cl8">
-                    <a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-                      by John Alvarado
-                    </a>
-                    <span className="f1-s-3 m-rl-3">-</span>
-                    <span className="f1-s-3">Feb 09</span>
-                  </span>
-                                        </div>
-                                    </div>
-                                </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                </div>
+                                            </>
+                                        ))}
+                                    </>
+                                }
                             </div>
                             {/* Pagination */}
                             <div className="flex-wr-s-c m-rl--7 p-t-15">
@@ -527,7 +237,7 @@ export function Home(props){
                                             placeholder="Email"
                                         />
                                         <button className="size-a-10 flex-c-c ab-t-r fs-16 cl9 hov-cl10 trans-03">
-                                            <i className="fa fa-arrow-right" />
+                                            <i className="fa fa-arrow-right"/>
                                         </button>
                                     </form>
                                 </div>
@@ -678,19 +388,19 @@ export function Home(props){
                                     </p>
                                     <div className="p-t-15">
                                         <a href="#" className="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-                                            <span className="fab fa-facebook-f" />
+                                            <span className="fab fa-facebook-f"/>
                                         </a>
                                         <a href="#" className="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-                                            <span className="fab fa-twitter" />
+                                            <span className="fab fa-twitter"/>
                                         </a>
                                         <a href="#" className="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-                                            <span className="fab fa-pinterest-p" />
+                                            <span className="fab fa-pinterest-p"/>
                                         </a>
                                         <a href="#" className="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-                                            <span className="fab fa-vimeo-v" />
+                                            <span className="fab fa-vimeo-v"/>
                                         </a>
                                         <a href="#" className="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-                                            <span className="fab fa-youtube" />
+                                            <span className="fab fa-youtube"/>
                                         </a>
                                     </div>
                                 </div>
@@ -702,7 +412,7 @@ export function Home(props){
                                 <ul>
                                     <li className="flex-wr-sb-s p-b-20">
                                         <a href="#" className="size-w-4 wrap-pic-w hov1 trans-03">
-                                            <img src="images/popular-post-01.jpg" alt="IMG" />
+                                            <img src="images/popular-post-01.jpg" alt="IMG"/>
                                         </a>
                                         <div className="size-w-5">
                                             <h6 className="p-b-5">
@@ -715,7 +425,7 @@ export function Home(props){
                                     </li>
                                     <li className="flex-wr-sb-s p-b-20">
                                         <a href="#" className="size-w-4 wrap-pic-w hov1 trans-03">
-                                            <img src="images/popular-post-02.jpg" alt="IMG" />
+                                            <img src="images/popular-post-02.jpg" alt="IMG"/>
                                         </a>
                                         <div className="size-w-5">
                                             <h6 className="p-b-5">
@@ -728,7 +438,7 @@ export function Home(props){
                                     </li>
                                     <li className="flex-wr-sb-s p-b-20">
                                         <a href="#" className="size-w-4 wrap-pic-w hov1 trans-03">
-                                            <img src="images/popular-post-03.jpg" alt="IMG" />
+                                            <img src="images/popular-post-03.jpg" alt="IMG"/>
                                         </a>
                                         <div className="size-w-5">
                                             <h6 className="p-b-5">
@@ -783,7 +493,7 @@ export function Home(props){
           <a href="#" className="f1-s-1 cl10 hov-link1">
             {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}
               Copyright © All rights reserved | This template is made with{" "}
-              <i className="fa fa-heart" aria-hidden="true" /> by{" "}
+              <i className="fa fa-heart" aria-hidden="true"/> by{" "}
           </a>
           <a href="https://colorlib.com" target="_blank">
             Colorlib
@@ -796,7 +506,7 @@ export function Home(props){
             {/* Back to top */}
             <div className="btn-back-to-top" id="myBtn">
                 <span className="symbol-btn-back-to-top">
-                  <span className="fas fa-angle-up" />
+                  <span className="fas fa-angle-up"/>
                 </span>
 
 
