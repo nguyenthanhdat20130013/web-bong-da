@@ -9,6 +9,7 @@ import "../Template/css/util.min.css"
 import "../Template/css/main.css"
 import Header from "../component/common/Header";
 import HomeCategory from "./HomeCategory";
+import {Link} from "react-router-dom";
 
 export function Home(props) {
     const [rssHome, setRssHome] = useState([]);
@@ -150,6 +151,176 @@ export function Home(props) {
                                     </>
                                 }
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section className="bg0 p-t-70">
+                <div className="container">
+                    <div className="row justify-content-center">
+                        <div className="col-md-10 col-lg-8">
+                            <div className="p-b-20">
+                                <div className="tab01 p-b-20">
+                                    <div className="tab01-head how2 how2-cl1 bocl12 flex-s-c m-r-10 m-r-0-sr991">
+                                        <h3 className="f1-m-2 cl12 tab01-title">
+                                            V-LEAGUE
+                                        </h3>
+                                        <Link to='/trang-chu/vietnam'>
+                                            <a className="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
+                                                Xem thêm
+                                                <i className="fs-12 m-l-5 fa fa-caret-right"></i>
+                                            </a>
+                                        </Link>
+                                    </div>
+                                    <HomeCategory url="https://www.bongda.com.vn/v-league.rss"/>
+                                </div>
+                                <div className="tab01 p-b-20">
+                                    <div className="tab01-head how2 how2-cl1 bocl12 flex-s-c m-r-10 m-r-0-sr991">
+                                        <h3 className="f1-m-2 cl12 tab01-title">
+                                            LA LIGA
+                                        </h3>
+                                        <Link to='/trang-chu/vietnam'>
+                                            <a className="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
+                                                Xem thêm
+                                                <i className="fs-12 m-l-5 fa fa-caret-right"></i>
+                                            </a>
+                                        </Link>
+                                    </div>
+                                    <HomeCategory url="https://www.bongda.com.vn/la-liga.rss"/>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div className="col-md-10 col-lg-4">
+                            <div className="p-l-10 p-rl-0-sr991 p-b-20">
+                                <div>
+                                    <div className="how2 how2-cl4 flex-s-c">
+                                        <h3 className="f1-m-2 cl3 tab01-title">
+                                            Most Popular
+                                        </h3>
+                                    </div>
+                                    <ul className="p-t-35">
+                                        <li className="flex-wr-sb-s p-b-22">
+                                            <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
+                                                1
+                                            </div>
+
+                                            <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                                            </a>
+                                        </li>
+
+                                        <li className="flex-wr-sb-s p-b-22">
+                                            <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
+                                                2
+                                            </div>
+
+                                            <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                                                Proin velit consectetur non neque
+                                            </a>
+                                        </li>
+
+                                        <li className="flex-wr-sb-s p-b-22">
+                                            <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
+                                                3
+                                            </div>
+
+                                            <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                                                Nunc vestibulum, enim vitae condimentum volutpat lobortis ante
+                                            </a>
+                                        </li>
+
+                                        <li className="flex-wr-sb-s p-b-22">
+                                            <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
+                                                4
+                                            </div>
+
+                                            <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                                                Proin velit justo consectetur non neque elementum
+                                            </a>
+                                        </li>
+
+                                        <li className="flex-wr-sb-s p-b-22">
+                                            <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0">
+                                                5
+                                            </div>
+
+                                            <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                                                Proin velit consectetur non neque
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+
+                                <div className="flex-c-s p-t-8">
+                                    <a href="#">
+                                        <img className="max-w-full" src="images/banner-02.jpg" alt="IMG"/>
+                                    </a>
+                                </div>
+
+
+                                <div className="p-t-50">
+                                    <div className="how2 how2-cl4 flex-s-c">
+                                        <h3 className="f1-m-2 cl3 tab01-title">
+                                            Stay Connected
+                                        </h3>
+                                    </div>
+
+                                    <ul className="p-t-35">
+                                        <li className="flex-wr-sb-c p-b-20">
+                                            <a href="#"
+                                               className="size-a-8 flex-c-c borad-3 size-a-8 bg-facebook fs-16 cl0 hov-cl0">
+                                                <span className="fab fa-facebook-f"></span>
+                                            </a>
+
+                                            <div className="size-w-3 flex-wr-sb-c">
+										<span className="f1-s-8 cl3 p-r-20">
+											6879 Fans
+										</span>
+
+                                                <a href="#" className="f1-s-9 text-uppercase cl3 hov-cl10 trans-03">
+                                                    Like
+                                                </a>
+                                            </div>
+                                        </li>
+
+                                        <li className="flex-wr-sb-c p-b-20">
+                                            <a href="#"
+                                               className="size-a-8 flex-c-c borad-3 size-a-8 bg-twitter fs-16 cl0 hov-cl0">
+                                                <span className="fab fa-twitter"></span>
+                                            </a>
+
+                                            <div className="size-w-3 flex-wr-sb-c">
+										<span className="f1-s-8 cl3 p-r-20">
+											568 Followers
+										</span>
+
+                                                <a href="#" className="f1-s-9 text-uppercase cl3 hov-cl10 trans-03">
+                                                    Follow
+                                                </a>
+                                            </div>
+                                        </li>
+
+                                        <li className="flex-wr-sb-c p-b-20">
+                                            <a href="#"
+                                               className="size-a-8 flex-c-c borad-3 size-a-8 bg-youtube fs-16 cl0 hov-cl0">
+                                                <span className="fab fa-youtube"></span>
+                                            </a>
+
+                                            <div className="size-w-3 flex-wr-sb-c">
+										<span className="f1-s-8 cl3 p-r-20">
+											5039 Subscribers
+										</span>
+
+                                                <a href="#" className="f1-s-9 text-uppercase cl3 hov-cl10 trans-03">
+                                                    Subscribe
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
