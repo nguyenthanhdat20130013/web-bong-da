@@ -7,10 +7,16 @@ const RelatedArticles = ({ relation }) => {
     const articles = [];
 
     items.forEach((item) => {
-        const title = item.querySelector('h3 a').textContent;
-        const link = item.querySelector('h3 a').getAttribute('href');
-        articles.push({ title, link });
+        try {
+            const title = item.querySelector('h3 a').textContent;
+            const link = item.querySelector('h3 a').getAttribute('href');
+            articles.push({ title, link });
+        } catch (error) {
+            // Xử lý lỗi ở đây
+            console.error('Đã xảy ra lỗi:', error);
+        }
     });
+
 
     return (
         <div className="p-b-30">

@@ -19,7 +19,9 @@ const ContentDetail = ({ url }) => {
     const [articleDescription, setArticleDescription] = useState('');
     const [articleContent, setArticleContent] = useState('');
     const [publishDate, setPublishDate] = useState('');
-    const [relation, setRelation] = useState('');
+    const [relation, setRelation] = useState(null);
+    const [articleContentRead, setArticleContentRead] = useState('');
+    const [isSpeaking, setIsSpeaking] = useState(false); // Trạng thái đang đọc
     useEffect(() => {
         const getContent = async () => {
             try {
@@ -33,9 +35,14 @@ const ContentDetail = ({ url }) => {
                 const description = $('.sapo_detail ').text();
                 const cleanedDescription = description.replace('BongDa.com.vn', '');
                 setArticleDescription(cleanedDescription);
-                //Lấy bài viết tương tự
-                const rela = $('.new_relation_top').html();
-                setRelation(rela);
+                // Lấy bài viết tương tự và cập nhật state
+                try {
+                    const rela = $('.new_relation_top').html();
+                    setRelation(rela);
+                } catch (error) {
+                    console.error('Error fetching related articles:', error);
+                    setRelation(null); // Nếu có lỗi, đặt giá trị relation là null
+                }
                 // Lấy nội dung bài viết
                 const content = $('#content_detail');
                 content.find('div.new_relation_top.pkg.in-article-related-news').remove();
@@ -44,6 +51,11 @@ const ContentDetail = ({ url }) => {
                 const publishDate = $('.text-right').text();
                 const cleanedPublishDate = publishDate.replace('Copy Link', '');
                 setPublishDate(cleanedPublishDate);
+                // Đọc nội dung bài viết
+                content.find('div.new_relation_top.pkg.in-article-related-news').remove();
+                content.find('expEdit').remove();
+                const ct = content.text();
+                setArticleContentRead(ct);
 
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -52,32 +64,60 @@ const ContentDetail = ({ url }) => {
 
         getContent();
     }, [url]);
+    const handleTextToSpeech = () => {
+        if ('speechSynthesis' in window) {
+            const speech = new SpeechSynthesisUtterance(
+                articleTitle + ' ' + articleDescription + ' ' + articleContentRead
+            );
+            speech.lang = 'vi-VN'; // Đặt ngôn ngữ của văn bản thành tiếng Việt
+
+            if (!isSpeaking) {
+                // Bắt đầu đọc nếu chưa đọc
+                speechSynthesis.speak(speech);
+                setIsSpeaking(true);
+            } else {
+                // Tạm dừng hoặc dừng đọc nếu đang đọc
+                if (speechSynthesis.paused) {
+                    speechSynthesis.resume(); // Tiếp tục đọc nếu đã tạm dừng
+                } else {
+                    speechSynthesis.pause(); // Tạm dừng đọc nếu đang đọc
+                }
+            }
+        } else {
+            console.log('Trình duyệt của bạn không hỗ trợ text-to-speech.');
+        }
+    };
+
+    // Quản lý sự kiện trước khi chuyển trang hoặc tải lại trang
+    useEffect(() => {
+        const handleBeforeUnload = (event) => {
+            if (isSpeaking) {
+                event.preventDefault();
+                event.returnValue = ''; // Hiển thị thông báo xác nhận rời khỏi trang
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [isSpeaking]);
 
 
     return (
         <div>
+
             <div className="container">
                 <div className="headline bg0 flex-wr-sb-c p-rl-20 p-tb-8">
-                    <div className="f2-s-1 p-r-30 m-tb-6">
-                        <a href="index.html" className="breadcrumb-item f1-s-3 cl9">
-                            Home
-                        </a>
+                    <div className="f2-s-1">
+                        {/* Nút phát/tạm dừng */}
 
-                        <a href="blog-list-01.html" className="breadcrumb-item f1-s-3 cl9">
-                            Blog
-                        </a>
-
-                        <span className="breadcrumb-item f1-s-3 cl9">
-					pellentesque
-				</span>
                     </div>
 
-                    <div className="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6">
-                        <input className="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search"
-                               placeholder="Search"/>
-                        <button className="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
-                            <i className="zmdi zmdi-search"></i>
-                        </button>
+                    <div className="pos-relative bo-1-rad-22 of-hidden bocl11 m-tb-6">
+                        <button onClick={handleTextToSpeech}>{isSpeaking ? 'Tạm dừng' : 'Đọc bài viết'}</button>
+
                     </div>
                 </div>
             </div>
