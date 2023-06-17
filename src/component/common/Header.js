@@ -67,8 +67,8 @@ export function Header() {
 
                                     </li>
                                     <li className="mega-menu-item">
-                                        <Link to={'/trang-chu/bandoc'}>
-                                            <a>Góc bạn đọc</a>
+                                        <Link to={'/trang-chu/tindaxem'}>
+                                            <a>Tin đã xem</a>
                                         </Link>
 
                                     </li>

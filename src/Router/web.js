@@ -4,6 +4,7 @@ import {Error} from "../component/Error";
 import Home from "../component/Home";
 import TransferNews from "../component/TransferNews";
 import Detail from "../component/Detail";
+import History from "../component/History";
 export const webRouter=createBrowserRouter([{
     path:'/',
     element:<App/>,
@@ -36,8 +37,8 @@ export const webRouter=createBrowserRouter([{
             path: '/trang-chu/y',
             element: <Home url={"https://www.bongda.com.vn/bong-da-y.rss"}/>
         }, {
-            path: '/trang-chu/bandoc',
-            element: <Home url={"https://www.bongda.com.vn/goc-ban-doc.rss"}/>
+            path: '/trang-chu/tindaxem',
+            element: <History/>
         }
 
     ]
