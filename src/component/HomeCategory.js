@@ -96,7 +96,7 @@ export function HomeCategory(props){
                                 <h5 className="p-b-5">
                                     <a onClick={() => add(rssType[0].title)}
                                         href={`detail?url=${encodeURIComponent(rssType[0].link)}`} className="f1-m-3 cl2 hov-cl10 trans-03">
-                                        {rssType[0].description}
+                                        {rssType[0].title}
                                     </a>
                                 </h5>
                                 <span className="cl8">
