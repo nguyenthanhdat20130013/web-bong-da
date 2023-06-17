@@ -13,7 +13,7 @@ import "../Template/vendor/css-hamburgers/hamburgers.min.css"
 import "../Template/css/util.min.css"
 import "../Template/css/main.css"
 
-const ContentDetail = ({ url }) => {
+const SearchResult = ({ url }) => {
     const [articleTitle, setArticleTitle] = useState('');
     const [articleDescription, setArticleDescription] = useState('');
     const [articleContent, setArticleContent] = useState('');
@@ -382,4 +382,4 @@ const ContentDetail = ({ url }) => {
     );
 };
 
-export default ContentDetail;
+export default SearchResult;

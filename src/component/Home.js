@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import "../Template/images/icons/favicon.png"
 import "../Template/fonts/font-awesome-4.7.0/css/font-awesome.min.css"
 import "../Template/fonts/fontawesome-5.0.8/css/fontawesome-all.min.css"
@@ -37,10 +38,19 @@ export function Home(props){
         fetchData();
     }, [props.url]);
 
+    // Search
+    let navigate = useNavigate();
+    const  [value, setvalue] = useState('');
+    const  onChange = (event)=>{
+            setvalue(event.target.value);
+    }
+    const onSearch = (value) =>{
+        /*/https://www.bongda.com.vn/${value}search/*/
+        navigate(`/search&q=${'https://www.bongda.com.vn/'+value + 'search/'}`);
+    }
+
     return(
         <div>
-
-
             <title>Category Page v1</title>
             <meta charSet="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -64,8 +74,10 @@ export function Home(props){
                             type="text"
                             name="search"
                             placeholder="Search"
+                            value={value}
+                            onChange={onChange}
                         />
-                        <button className="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
+                        <button onClick={() => onSearch(value)}  className="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03 search-btn">
                             <i className="zmdi zmdi-search" />
                         </button>
                     </div>
@@ -96,11 +108,11 @@ export function Home(props){
 
 
                                             <span className="how1-child2">
-                        <span className="f1-s-4 cl11">{rssHome[0].pubDate}</span>
-                <a style={{ opacity : '0.98'}}
-                   href={`detail?url=${encodeURIComponent(rssHome[0].link)}`} className="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
-                    {rssHome[0].description}
-                </a>
+                                        <span className="f1-s-4 cl11">{rssHome[0].pubDate}</span>
+                                <a style={{ opacity : '0.98'}}
+                                   href={`detail?url=${encodeURIComponent(rssHome[0].link)}`} className="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
+                                    {rssHome[0].description}
+                                </a>
 
 
                                                 {/*<span className="f1-s-3 cl11 m-rl-3">-</span>
