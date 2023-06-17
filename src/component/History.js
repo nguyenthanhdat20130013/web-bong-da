@@ -1,415 +1,54 @@
-import React, {useState, useEffect} from 'react';
-import "../Template/images/icons/favicon.png"
-import "../Template/fonts/font-awesome-4.7.0/css/font-awesome.min.css"
-import "../Template/fonts/fontawesome-5.0.8/css/fontawesome-all.min.css"
-import "../Template/fonts/iconic/css/material-design-iconic-font.min.css"
-import "../Template/vendor/animate/animate.css"
-import "../Template/vendor/css-hamburgers/hamburgers.min.css"
-import "../Template/css/util.min.css"
-import "../Template/css/main.css"
-import Header from "../component/common/Header";
-import HomeCategory from "./HomeCategory";
-import {Link} from "react-router-dom";
+import React from 'react';
+import Header from "./common/Header";
 
-export function Home(props) {
-    const [rssHome, setRssHome] = useState([]);
-
-    useEffect(() => {
-        let fetchData = async () => {
-            let response = await fetch(
-                "https://api.allorigins.win/get?url=" +
-                encodeURIComponent(props.url)
-            );
-            let data = await response.json();
-            let parser = new DOMParser();
-            let xml = parser.parseFromString(data.contents, "application/xml");
-            let items = xml.querySelectorAll("item");
-            let rssItems = [];
-            items.forEach((item) => {
-                rssItems.push({
-                    title: item.querySelector("title").textContent,
-                    description: item.querySelector("description").textContent,
-                    image: item.querySelector("image").textContent,
-                    link: item.querySelector("link").textContent,
-                    pubDate: item.querySelector("pubDate").textContent,
-                    isXem:false,
-                });
-            });
-            setRssHome(rssItems);
-        };
-        fetchData();
-    }, [props.url]);
-    function isArticleExist(title) {
-        const savedArticles = localStorage.getItem('savedArticles');
-        if (savedArticles) {
-            const articles = JSON.parse(savedArticles);
-            return articles.some(article => article.title === title);
-        }
-        return false;
-    }
-
-    function add(title) {
-        // Kiểm tra bài báo đã tồn tại trong localStorage
-        if (isArticleExist(title)) {
-            console.log('Bài báo đã tồn tại trong localStorage.');
-            return;
-        }
-
-        // Tìm bài báo theo tiêu đề trong rssHome
-        const article = rssHome.find(item => item.title === title);
-
-        // Kiểm tra nếu bài báo không tồn tại trong rssHome
-        if (!article) {
-            console.log('Không tìm thấy bài báo trong rssHome.');
-            return;
-        }
-
-        // Lấy danh sách bài báo từ localStorage
-        const savedArticles = localStorage.getItem('savedArticles');
-        let articles = savedArticles ? JSON.parse(savedArticles) : [];
-
-        // Thêm bài báo vào danh sách
-        articles.push({
-            link: article.link,
-            image: article.image,
-            title: article.title,
-            description: article.description,
-            pubDate: article.pubDate
-        });
-
-        // Lưu danh sách bài báo vào localStorage
-        localStorage.setItem('savedArticles', JSON.stringify(articles));
-
-        console.log('Bài báo đã được lưu vào localStorage.');
-    }
-
-
+function SavedArticles() {
+    // Lấy danh sách bài báo từ localStorage
+    const savedArticles = localStorage.getItem('savedArticles');
+    let articles = savedArticles ? JSON.parse(savedArticles) : [];
 
     return (
         <div>
-
-
             <title>Category Page v1</title>
             <meta charSet="UTF-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
             <Header></Header>
-
-            {/* Breadcrumb */}
-            <div className="container">
-                <div className="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
-                    <div className="f2-s-1 p-r-30 m-tb-6">
-                        <a href="index.html" className="breadcrumb-item f1-s-3 cl9">
-                            Trang chủ
-                        </a>
-                        <a href="category-02.html" className="breadcrumb-item f1-s-3 cl9">
-                            Mới nhất
-                        </a>
-                    </div>
-                    <div className="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6">
-                        <input
-                            className="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45"
-                            type="text"
-                            name="search"
-                            placeholder="Search"
-                        />
-                        <button className="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
-                            <i className="zmdi zmdi-search"/>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            {/* Page heading */}
-            <div className="container p-t-4 p-b-40">
-                <h2 className="f1-l-1 cl2">Mới nhất</h2>
-            </div>
-            {/* Feature post */}
-            <section className="bg0">
-                <div className="container">
-                    <div className="row m-rl--1">
-                        <div className="col-md-6 p-rl-1 p-b-2">
-                            {rssHome.length > 0 &&
-                                <>
-                                    <div className="bg-img1 size-a-3 how1 pos-relative"
-                                         style={{backgroundImage: `url(${rssHome[0].image})`}}>
-                                        <a onClick={() => add(rssHome[0].title)}
-                                            href={`detail?url=${encodeURIComponent(rssHome[0].link)}`}
-
-                                            className="dis-block how1-child1 trans-03"
-                                        />
-                                        <div className="flex-col-e-s s-full p-rl-25 p-tb-20">
-                                            <a style={{zIndex: '3', fontSize: '23px'}} onClick={() => add(rssHome[0].title)}
-                                               href={`detail?url=${encodeURIComponent(rssHome[0].link)}`}
-                                               className="how-txt1 size-a-6 f1-l-1 cl0 hov-cl10 trans-03">
-                                                {rssHome[0].title}
-                                            </a>
-
-                                            <span className="how1-child2">
-                        <span className="f1-s-4 cl11">{rssHome[0].pubDate}</span>
-                <a style={{opacity: '0.98'}} onClick={() => add(rssHome[0].title)}
-                   href={`detail?url=${encodeURIComponent(rssHome[0].link)}`}
-                   className="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
-                    {rssHome[0].description}
-                </a>
-
-
-                                                {/*<span className="f1-s-3 cl11 m-rl-3">-</span>
-                        <span className="f1-s-3 cl11">Feb 16</span>*/}
-              </span>
-                                        </div>
-                                    </div>
-
-                                </>
-                            }
-                        </div>
-                        <div className="col-md-6 p-rl-1">
-                            <div className="row m-rl--1">
-                                {rssHome.length > 0 &&
-                                    <>
-                                        {rssHome.slice(1, 5).map((item, index) => (
-                                            <div className="col-sm-6 p-rl-1 p-b-2" key={index}>
-                                                <div className="bg-img1 size-a-14 how1 pos-relative"
-                                                     style={{backgroundImage: `url(${item.image})`}}>
-                                                    <a onClick={() => add(item.title)}
-                                                        href={`detail?url=${encodeURIComponent(item.link)}`}
-                                                        className="dis-block how1-child1 trans-03"
-                                                    />
-                                                    <div className="flex-col-e-s s-full p-rl-25 p-tb-20">
-                                                        <a onClick={() => add(item.title)}
-                                                            href={`detail?url=${encodeURIComponent(item.link)}`}
-                                                            className="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2"
-                                                        >
-                                                            {item.title}
-                                                        </a>
-                                                        <h3 className="how1-child2 m-t-14">
-                                                            <a onClick={() => add(item.title)}
-                                                                href={`detail?url=${encodeURIComponent(item.link)}`}
-                                                                className="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03"
-                                                            >
-                                                                {item.description}
-                                                            </a>
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
-
-                                    </>
-                                }
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="bg0 p-t-70">
-                <div className="container">
-                    <div className="row justify-content-center">
-                        <div className="col-md-10 col-lg-8">
-                            <div className="p-b-20">
-                                <div className="tab01 p-b-20">
-                                    <div className="tab01-head how2 how2-cl1 bocl12 flex-s-c m-r-10 m-r-0-sr991">
-                                        <h3 className="f1-m-2 cl12 tab01-title">
-                                            V-LEAGUE
-                                        </h3>
-                                        <Link to='/trang-chu/vietnam'>
-                                            <a className="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
-                                                Xem thêm
-                                                <i className="fs-12 m-l-5 fa fa-caret-right"></i>
-                                            </a>
-                                        </Link>
-                                    </div>
-                                    <HomeCategory url="https://www.bongda.com.vn/v-league.rss"/>
-                                </div>
-                                <div className="tab01 p-b-20">
-                                    <div className="tab01-head how2 how2-cl1 bocl12 flex-s-c m-r-10 m-r-0-sr991">
-                                        <h3 className="f1-m-2 cl12 tab01-title">
-                                            LA LIGA
-                                        </h3>
-                                        <Link to='/trang-chu/vietnam'>
-                                            <a className="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
-                                                Xem thêm
-                                                <i className="fs-12 m-l-5 fa fa-caret-right"></i>
-                                            </a>
-                                        </Link>
-                                    </div>
-                                    <HomeCategory url="https://www.bongda.com.vn/la-liga.rss"/>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div className="col-md-10 col-lg-4">
-                            <div className="p-l-10 p-rl-0-sr991 p-b-20">
-                                <div>
-                                    <div className="how2 how2-cl4 flex-s-c">
-                                        <h3 className="f1-m-2 cl3 tab01-title">
-                                            Most Popular
-                                        </h3>
-                                    </div>
-                                    <ul className="p-t-35">
-                                        <li className="flex-wr-sb-s p-b-22">
-                                            <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                                                1
-                                            </div>
-
-                                            <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                            </a>
-                                        </li>
-
-                                        <li className="flex-wr-sb-s p-b-22">
-                                            <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                                                2
-                                            </div>
-
-                                            <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                                Proin velit consectetur non neque
-                                            </a>
-                                        </li>
-
-                                        <li className="flex-wr-sb-s p-b-22">
-                                            <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                                                3
-                                            </div>
-
-                                            <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                                Nunc vestibulum, enim vitae condimentum volutpat lobortis ante
-                                            </a>
-                                        </li>
-
-                                        <li className="flex-wr-sb-s p-b-22">
-                                            <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                                                4
-                                            </div>
-
-                                            <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                                Proin velit justo consectetur non neque elementum
-                                            </a>
-                                        </li>
-
-                                        <li className="flex-wr-sb-s p-b-22">
-                                            <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0">
-                                                5
-                                            </div>
-
-                                            <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                                Proin velit consectetur non neque
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-
-                                <div className="flex-c-s p-t-8">
-                                    <a href="#">
-                                        <img className="max-w-full" src="images/banner-02.jpg" alt="IMG"/>
-                                    </a>
-                                </div>
-
-
-                                <div className="p-t-50">
-                                    <div className="how2 how2-cl4 flex-s-c">
-                                        <h3 className="f1-m-2 cl3 tab01-title">
-                                            Stay Connected
-                                        </h3>
-                                    </div>
-
-                                    <ul className="p-t-35">
-                                        <li className="flex-wr-sb-c p-b-20">
-                                            <a href="#"
-                                               className="size-a-8 flex-c-c borad-3 size-a-8 bg-facebook fs-16 cl0 hov-cl0">
-                                                <span className="fab fa-facebook-f"></span>
-                                            </a>
-
-                                            <div className="size-w-3 flex-wr-sb-c">
-										<span className="f1-s-8 cl3 p-r-20">
-											6879 Fans
-										</span>
-
-                                                <a href="#" className="f1-s-9 text-uppercase cl3 hov-cl10 trans-03">
-                                                    Like
-                                                </a>
-                                            </div>
-                                        </li>
-
-                                        <li className="flex-wr-sb-c p-b-20">
-                                            <a href="#"
-                                               className="size-a-8 flex-c-c borad-3 size-a-8 bg-twitter fs-16 cl0 hov-cl0">
-                                                <span className="fab fa-twitter"></span>
-                                            </a>
-
-                                            <div className="size-w-3 flex-wr-sb-c">
-										<span className="f1-s-8 cl3 p-r-20">
-											568 Followers
-										</span>
-
-                                                <a href="#" className="f1-s-9 text-uppercase cl3 hov-cl10 trans-03">
-                                                    Follow
-                                                </a>
-                                            </div>
-                                        </li>
-
-                                        <li className="flex-wr-sb-c p-b-20">
-                                            <a href="#"
-                                               className="size-a-8 flex-c-c borad-3 size-a-8 bg-youtube fs-16 cl0 hov-cl0">
-                                                <span className="fab fa-youtube"></span>
-                                            </a>
-
-                                            <div className="size-w-3 flex-wr-sb-c">
-										<span className="f1-s-8 cl3 p-r-20">
-											5039 Subscribers
-										</span>
-
-                                                <a href="#" className="f1-s-9 text-uppercase cl3 hov-cl10 trans-03">
-                                                    Subscribe
-                                                </a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            {/* Post */}
             <section className="bg0 p-t-70 p-b-55">
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-md-10 col-lg-8 p-b-80">
                             <h1></h1>
                             <div className="row">
-                                {rssHome.length > 0 &&
+                                {articles.length > 0 &&
                                     <>
-                                        {rssHome.slice(5, 15).map((item, index) => (
+                                        {articles.map((article, index) => (
                                             <>
                                                 <div className="col-sm-6 p-r-25 p-r-15-sr991">
                                                     {/* Item latest */}
                                                     <div className="m-b-45">
 
-                                                        <a  onClick={() => add(item.title)}
-                                                            href={`detail?url=${encodeURIComponent(item.link)}`}
+                                                        <a
+                                                            href={`detail?url=${encodeURIComponent(article.link)}`}
                                                             className="wrap-pic-w hov1 trans-03"
                                                         >
-                                                            <img src={item.image} alt="IMG"/>
+                                                            <img src={article.image} alt="IMG"/>
                                                         </a>
 
                                                         <div className="p-t-16">
                                                             <h5 className="p-b-5">
-                                                                <a  onClick={() => add(item.title)}
-                                                                    href={`detail?url=${encodeURIComponent(item.link)}`}
+                                                                <a
+                                                                    href={`detail?url=${encodeURIComponent(article.link)}`}
                                                                     className="f1-m-3 cl2 hov-cl10 trans-03"
                                                                 >
-                                                                    {item.title}
+                                                                    {article.title}
                                                                 </a>
                                                             </h5>
                                                             <span className="cl8">
 
                     <a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-                      {item.description}
+                      {article.description}
                     </a>
                     <span className="f1-s-3 m-rl-3">-</span>
-                                                    <span className="f1-s-3">{item.pubDate}</span>
+                                                    <span className="f1-s-3">{article.pubDate}</span>
                   </span>
                                                         </div>
 
@@ -579,7 +218,6 @@ export function Home(props) {
                     </div>
                 </div>
             </section>
-            {/* Footer */}
             <footer>
                 <div className="bg2 p-t-40 p-b-25">
                     <div className="container">
@@ -721,19 +359,23 @@ export function Home(props) {
                     </div>
                 </div>
             </footer>
-            {/* Back to top */}
-            <div className="btn-back-to-top" id="myBtn">
-                <span className="symbol-btn-back-to-top">
-                  <span className="fas fa-angle-up"/>
-                </span>
-
-
-            </div>
-
         </div>
-
+        // <div>
+        //     <h1>Các bài báo đã xem</h1>
+        //     {articles.length > 0 ? (
+        //         <ul>
+        //             {articles.map((article, index) => (
+        //                 <li key={index}>
+        //                     <a href={article.link}>{article.title}</a>
+        //                 </li>
+        //             ))}
+        //         </ul>
+        //     ) : (
+        //         <p>Không có bài báo đã xem.</p>
+        //     )}
+        // </div>
     )
+        ;
 }
 
-export default Home
-
+export default SavedArticles;
