@@ -39,25 +39,87 @@ export function Header() {
                                         <Link to={'/trang-chu'}>
                                             <a>Trang chủ</a>
                                         </Link>
-
                                     </li>
-                                    <li className="mega-menu-item">
+                                    <li className="">
                                         <Link to={'/trang-chu/tin-chuyen-nhuong'}>
                                             <a>Tin chuyển nhượng</a>
                                         </Link>
                                     </li>
-
-                                    <li className="mega-menu-item">
+                                    <li className="main-menu">
                                         <Link to={'/trang-chu/vietnam'}>
                                             <a>Bóng đá Việt Nam</a>
                                         </Link>
+                                        <ul className="sub-menu">
+                                            <li>
+                                                <Link to={'/doi-tuyen-quoc-gia'}>
+                                                    <a>Các ĐTQG</a>
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to={'/v-league'}>
+                                                    <a> V-League </a>
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to={'/cup-quoc-gia-vn'}>
+                                                    <a> Cúp Quốc Gia </a>
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to={'/hang-nhat-vn'}>
+                                                    <a> Hạng Nhất  </a>
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to={'/giai-tre-vn'}>
+                                                    <a> Giải Trẻ  </a>
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to={'/bong-da-nu'}>
+                                                    <a>   Bóng Đá Nữ         </a>
+                                                </Link>
+                                            </li>
+
+                                            <li>
+                                                <Link to={'/vff'}>
+                                                    <a> VFF </a>
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to={'/tin-khac-vn'}>
+                                                    <a>     Tin Khác </a>
+                                                </Link>
+                                            </li>
+                                        </ul>
                                     </li>
 
-                                    <li className="mega-menu-item">
+                                    <li className="main-menu">
                                         <Link to={'/trang-chu/anh'}>
-                                             <a>Bóng đá Anh</a>
+                                            <a>Bóng đá Anh</a>
                                         </Link>
-
+                                        <ul className="sub-menu">
+                                            <li>
+                                                <Link to={'/premier-league'}>
+                                                    <a>Premier League</a>
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to={'/fa-cup'}>
+                                                    <a>FA Cup </a>
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to={'/efl'}>
+                                                    <a>EFL Cup </a>
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to={'/tin-khac'}>
+                                                    <a>  Tin Khác </a>
+                                                </Link>
+                                            </li>
+                                        </ul>
                                     </li>
 
                                     <li className="mega-menu-item">
@@ -67,12 +129,17 @@ export function Header() {
 
                                     </li>
                                     <li className="mega-menu-item">
+                                        <Link to={'/champions-league'}>
+                                            <a>Champions League</a>
+                                        </Link>
+
+                                    </li>
+                                    <li className="mega-menu-item">
                                         <Link to={'/trang-chu/tindaxem'}>
                                             <a>Tin đã xem</a>
                                         </Link>
 
                                     </li>
-
                                 </ul>
                             </nav>
                         </div>

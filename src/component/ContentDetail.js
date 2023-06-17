@@ -3,7 +3,6 @@ import axios from 'axios';
 import cheerio from 'cheerio';
 import {formatPubDate} from "../component/Convert";
 import { Link } from 'react-router-dom';
-
 import "../Template/images/icons/favicon.png"
 import "../Template/fonts/font-awesome-4.7.0/css/font-awesome.min.css"
 import "../Template/fonts/fontawesome-5.0.8/css/fontawesome-all.min.css"
