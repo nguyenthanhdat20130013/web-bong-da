@@ -13,7 +13,7 @@ import "../Template/vendor/css-hamburgers/hamburgers.min.css"
 import "../Template/css/util.min.css"
 import "../Template/css/main.css"
 
-const SearchResult = ({ url }) => {
+const SearchResult = ({ q }) => {
     const [articleTitle, setArticleTitle] = useState('');
     const [articleDescription, setArticleDescription] = useState('');
     const [articleContent, setArticleContent] = useState('');
@@ -22,7 +22,7 @@ const SearchResult = ({ url }) => {
     useEffect(() => {
         const getContent = async () => {
             try {
-                const response = await fetch('https://cors-anywhere.herokuapp.com/' + url);
+                const response = await fetch('https://cors-anywhere.herokuapp.com/' + q);
                 const html = await response.text();
                 const $ = cheerio.load(html);
 
@@ -48,7 +48,7 @@ const SearchResult = ({ url }) => {
         };
 
         getContent();
-    }, [url]);
+    }, [q]);
 
 
     return (

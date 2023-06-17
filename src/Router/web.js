@@ -96,7 +96,7 @@ export const webRouter=createBrowserRouter([{
         },
         {
             path: '/search',
-            element: <Detail/>
+            element: <SearchResult/>
         },
     ]
 }]);

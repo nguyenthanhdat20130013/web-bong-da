@@ -46,7 +46,8 @@ export function Home(props){
     }
     const onSearch = (value) =>{
         /*/https://www.bongda.com.vn/${value}search/*/
-        navigate(`/search&q=${'https://www.bongda.com.vn/'+value + 'search/'}`);
+        let seacrchValue = value.replace(/\s+/g, '+');
+        navigate(`/search?q=${'https://www.bongda.com.vn/'+ seacrchValue + '-search/'}`);
     }
 
     return(
