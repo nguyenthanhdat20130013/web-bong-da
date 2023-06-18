@@ -12,6 +12,8 @@ import "../Template/vendor/css-hamburgers/hamburgers.min.css"
 import "../Template/css/util.min.css"
 import "../Template/css/main.css"
 import RelatedArticles from "./RelatedArticles";
+import Footer from "./common/Footer";
+import Header from "./common/Header";
 
 const ContentDetail = ({ url }) => {
     const [articleTitle, setArticleTitle] = useState('');
@@ -21,6 +23,7 @@ const ContentDetail = ({ url }) => {
     const [relation, setRelation] = useState(null);
     const [articleContentRead, setArticleContentRead] = useState('');
     const [isSpeaking, setIsSpeaking] = useState(false); // Trạng thái đang đọc
+    const [isVisible, setIsVisible] = useState(false);
     useEffect(() => {
         const getContent = async () => {
             try {
@@ -102,11 +105,33 @@ const ContentDetail = ({ url }) => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
     }, [isSpeaking]);
+    // Hiển thị nút "Trở lại đầu trang" khi cuộn xuống một khoảng cách nhất định
+    const handleScroll = () => {
+        if (window.pageYOffset > 300) {
+            setIsVisible(true);
+        } else {
+            setIsVisible(false);
+        }
+    };
+
+    // Thêm sự kiện lắng nghe cuộn trang khi thành phần được tạo
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // Cuộn trang lên đầu khi người dùng nhấp vào nút
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
 
     return (
         <div>
-
+            <title>{articleTitle}</title>
+            <meta charSet="UTF-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <Header></Header>
             <div className="container">
                 <div className="headline bg0 flex-wr-sb-c p-rl-20 p-tb-8">
                     <div className="f2-s-1">
@@ -153,7 +178,14 @@ const ContentDetail = ({ url }) => {
                                         <div dangerouslySetInnerHTML={{__html: articleContent}}/>
                                     ) : (
                                         <div>Đang tải trang, chờ xíu....</div>
-                                    )}</div>
+                                    )}
+                                        <style>
+                                            {`
+                                                h2 {
+                                                  font-size: 1rem;
+                                                }
+                                            `}
+                                        </style></div>
                                     <div className="flex-s-s p-t-12 p-b-15">
 								<span className="f1-s-12 cl5 m-r-8">
 									Tags:
@@ -172,28 +204,19 @@ const ContentDetail = ({ url }) => {
 								</span>
 
                                         <div className="flex-wr-s-s size-w-0">
-                                            <a href="#"
-                                               className="dis-block f1-s-13 cl0 bg-facebook borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
+                                            <a href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
+                                                className="dis-block f1-s-13 cl0 bg-facebook borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03"
+                                                target="_blank"
+                                                rel="noopener noreferrer">
                                                 <i className="fab fa-facebook-f m-r-7"></i>
                                                 Facebook
                                             </a>
-
-                                            <a href="#"
-                                               className="dis-block f1-s-13 cl0 bg-twitter borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-                                                <i className="fab fa-twitter m-r-7"></i>
+                                            <a href={`https://twitter.com/share?url=${url}`}
+                                               className="dis-block f1-s-13 cl0 bg-twitter borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03"
+                                               target="_blank"
+                                               rel="noopener noreferrer">
+                                                <i className="fab fa-facebook-f m-r-7"></i>
                                                 Twitter
-                                            </a>
-
-                                            <a href="#"
-                                               className="dis-block f1-s-13 cl0 bg-google borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-                                                <i className="fab fa-google-plus-g m-r-7"></i>
-                                                Google+
-                                            </a>
-
-                                            <a href="#"
-                                               className="dis-block f1-s-13 cl0 bg-pinterest borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-                                                <i className="fab fa-pinterest-p m-r-7"></i>
-                                                Pinterest
                                             </a>
                                         </div>
                                     </div>
@@ -204,103 +227,43 @@ const ContentDetail = ({ url }) => {
 
                         <div className="col-md-10 col-lg-4 p-b-30">
                             <div className="p-l-10 p-rl-0-sr991 p-t-70">
-
-                                <div className="p-b-60">
-                                    <div className="how2 how2-cl4 flex-s-c">
-                                        <h3 className="f1-m-2 cl3 tab01-title">
-                                            Danh mục
-                                        </h3>
-                                    </div>
-
-                                    <ul className="p-t-35">
-                                        <li className="how-bor3 p-rl-4">
-                                            <a href="#"
-                                               className="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-                                                Fashion
-                                            </a>
-                                        </li>
-
-                                        <li className="how-bor3 p-rl-4">
-                                            <a href="#"
-                                               className="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-                                                Beauty
-                                            </a>
-                                        </li>
-
-                                        <li className="how-bor3 p-rl-4">
-                                            <a href="#"
-                                               className="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-                                                Street Style
-                                            </a>
-                                        </li>
-
-                                        <li className="how-bor3 p-rl-4">
-                                            <a href="#"
-                                               className="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-                                                Life Style
-                                            </a>
-                                        </li>
-
-                                        <li className="how-bor3 p-rl-4">
-                                            <a href="#"
-                                               className="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-                                                DIY & Crafts
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
                                 {relation && (
                                     <div>
                                         <RelatedArticles relation={relation} />
                                     </div>
                                 )}
+                                {/* Tag */}
                                 <div>
                                     <div className="how2 how2-cl4 flex-s-c m-b-30">
-                                        <h3 className="f1-m-2 cl3 tab01-title">
-                                            Tags
-                                        </h3>
+                                        <h3 className="f1-m-2 cl3 tab01-title">Thẻ</h3>
                                     </div>
-
                                     <div className="flex-wr-s-s m-rl--5">
-                                        <a href="#"
-                                           className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                            Fashion
-                                        </a>
+                                        <Link to={'/trang-chu/vietnam'}>
+                                            <a href="#" className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                                Việt Nam
+                                            </a>
+                                        </Link>
+                                        <Link to={'/v-league'}>
+                                            <a href="#" className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                                V-League
+                                            </a>
+                                        </Link>
+                                        <Link to={'/giai-tre-vn'}>
+                                            <a href="#" className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                                Giải trẻ VN
+                                            </a>
+                                        </Link>
+                                        <Link to={'/fa-cup'}>
+                                            <a href="#" className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                                FA Cup
+                                            </a>
+                                        </Link>
+                                        <Link to={'/chau-au'}>
+                                            <a href="#" className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                                Châu Âu
+                                            </a>
+                                        </Link>
 
-                                        <a href="#"
-                                           className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                            Lifestyle
-                                        </a>
-
-                                        <a href="#"
-                                           className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                            Denim
-                                        </a>
-
-                                        <a href="#"
-                                           className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                            Streetstyle
-                                        </a>
-
-                                        <a href="#"
-                                           className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                            Crafts
-                                        </a>
-
-                                        <a href="#"
-                                           className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                            Magazine
-                                        </a>
-
-                                        <a href="#"
-                                           className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                            News
-                                        </a>
-
-                                        <a href="#"
-                                           className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                            Blogs
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -308,6 +271,12 @@ const ContentDetail = ({ url }) => {
                     </div>
                 </div>
             </section>
+            {/* Back to top */}
+            {isVisible && (
+                <button className="scroll-to-top-button" onClick={scrollToTop}>
+                    <i className="fa fa-angle-double-up" aria-hidden="true"></i>
+                </button>
+            )}
         </div>
 
     );

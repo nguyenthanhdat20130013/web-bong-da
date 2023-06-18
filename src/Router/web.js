@@ -22,7 +22,7 @@ export const webRouter=createBrowserRouter([{
             path:'/trang-chu',
             element: <Home url="https://www.bongda.com.vn/feed.rss"/>
         },
-        , {
+         {
             path: '/detail',
             element: <Detail/>,
         },
@@ -54,48 +54,48 @@ export const webRouter=createBrowserRouter([{
         // Bong da Viet Nam
         {
             path: '/doi-tuyen-quoc-gia',
-            element: <Home url={"https://www.bongda.com.vn/doi-tuyen-quoc-gia.rss"}/>
+            element: <HomeType url={"https://www.bongda.com.vn/doi-tuyen-quoc-gia.rss"}/>
         },
         {
             path: '/cup-quoc-gia-vn',
-            element: <Home url={"https://www.bongda.com.vn/cup-quoc-gia-vn.rss"}/>
+            element: <HomeType url={"https://www.bongda.com.vn/cup-quoc-gia-vn.rss"}/>
         },
         {
             path: '/hang-nhat-vn',
-            element: <Home url={"https://www.bongda.com.vn/hang-nhat-vn.rss"}/>
+            element: <HomeType url={"https://www.bongda.com.vn/hang-nhat-vn.rss"}/>
         },
         {
             path: '/giai-tre-vn',
-            element: <Home url={"https://www.bongda.com.vn/giai-tre-vn.rss"}/>
+            element: <HomeType url={"https://www.bongda.com.vn/giai-tre-vn.rss"}/>
         },
         {
             path: '/vff',
-            element: <Home url={"https://www.bongda.com.vn/vff.rss"}/>
+            element: <HomeType url={"https://www.bongda.com.vn/vff.rss"}/>
         },
         {
             path: '/tin-khac-vn',
-            element: <Home url={"https://www.bongda.com.vn/tin-khac-vn.rss"}/>
+            element: <HomeType url={"https://www.bongda.com.vn/tin-khac-vn.rss"}/>
         },
         {
             path: '/bong-da-nu',
-            element: <Home url={"https://www.bongda.com.vn/bong-da-nu.rss"}/>
+            element: <HomeType url={"https://www.bongda.com.vn/bong-da-nu.rss"}/>
         },
         // bong da anh
         {
             path: '/fa-cup',
-            element: <Home url={"https://www.bongda.com.vn/fa-cup.rss"}/>
+            element: <HomeType url={"https://www.bongda.com.vn/fa-cup.rss"}/>
         },
         {
             path: '/efl',
-            element: <Home url={"https://www.bongda.com.vn/efl-cup.rss"}/>
+            element: <HomeType url={"https://www.bongda.com.vn/efl-cup.rss"}/>
         },
         {
             path: '/tin-khac',
-            element: <Home url={"https://www.bongda.com.vn/tin-khac.rss"}/>
+            element: <HomeType url={"https://www.bongda.com.vn/tin-khac.rss"}/>
         },
         {
             path: '/champions-league',
-            element: <Home url={"https://www.bongda.com.vn/champions-league.rss"}/>
+            element: <HomeType url={"https://www.bongda.com.vn/champions-league.rss"}/>
         },
         {
             path: '/search',
@@ -103,7 +103,28 @@ export const webRouter=createBrowserRouter([{
         },
         {
             path: '/bandoc',
-            element: <Home url={"https://www.bongda.com.vn/goc-ban-doc.rss"}/>
+            element: <HomeType url={"https://www.bongda.com.vn/goc-ban-doc.rss"}/>
         },
+        // the loai
+        {
+            path: '/chau-au',
+            element: <HomeType url={"https://www.bongda.com.vn/bong-da-chau-au.rss"}/>
+        },
+        {
+            path: '/chau-a',
+            element: <HomeType url={"https://www.bongda.com.vn/bong-da-chau-a.rss"}/>
+        },
+        {
+            path: '/chau-my',
+            element: <HomeType url={"https://www.bongda.com.vn/bong-da-chau-my.rss"}/>
+        },
+        {
+            path: '/chau-phi',
+            element: <HomeType url={"https://www.bongda.com.vn/bong-da-chau-phi.rss"}/>
+        },
+        {
+            path: '/giao-huu',
+            element: <HomeType url={"https://www.bongda.com.vn/giao-huu.rss"}/>
+        }
     ]
 }]);

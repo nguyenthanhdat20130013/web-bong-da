@@ -12,6 +12,7 @@ export function Header() {
     return (
         <div>
             <header>
+                <title>Web bóng đá</title>
                 <script src="../../Template/js/main.js"></script>
                 <script src="../../Template/vendor/bootstrap/js/bootstrap.min.js"></script>
                 <script src="../../Template/vendor/jquery/jquery-3.2.1.min.js"></script>
