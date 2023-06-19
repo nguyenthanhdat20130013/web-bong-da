@@ -10,6 +10,8 @@ import "../Template/css/main.css"
 import Header from "../component/common/Header";
 import HomeCategory from "./HomeCategory";
 import {Link} from "react-router-dom";
+import BreadCrumb from "./common/BreadCrumb";
+import PageHeading from "./common/PageHeading";
 
 export function HomeType(props) {
     const [rssHome, setRssHome] = useState([]);
@@ -96,35 +98,9 @@ export function HomeType(props) {
             <Header></Header>
 
             {/* Breadcrumb */}
-            <div className="container">
-                <div className="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
-                    <div className="f2-s-1 p-r-30 m-tb-6">
-                        <a href="index.html" className="breadcrumb-item f1-s-3 cl9">
-                            Trang chủ
-                        </a>
-                        <a href="category-02.html" className="breadcrumb-item f1-s-3 cl9">
-                            Mới nhất
-                        </a>
-                    </div>
-                    <form action={"/search"}>
-                        <div className="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6">
-                            <input
-                                className="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45"
-                                type="text"
-                                name="q"
-                                placeholder="Search"
-                            />
-                            <button className="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03 search-btn">
-                                <i className="zmdi zmdi-search" />
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <BreadCrumb></BreadCrumb>
             {/* Page heading */}
-            <div className="container p-t-4 p-b-40">
-                <h2 className="f1-l-1 cl2">Mới nhất</h2>
-            </div>
+            <PageHeading></PageHeading>
             {/* Feature post */}
             <section className="bg0">
                 <div className="container">

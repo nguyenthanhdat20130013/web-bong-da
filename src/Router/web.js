@@ -11,7 +11,7 @@ export const webRouter=createBrowserRouter([{
     path:'/',
     element:<App/>,
     children:[{
-        path:'/trang-chu/tin-chuyen-nhuong',
+        path:'/tin-chuyen-nhuong',
         element: <HomeType url="https://www.bongda.com.vn/tin-chuyen-nhuong.rss" />
 
     }, {
@@ -30,16 +30,16 @@ export const webRouter=createBrowserRouter([{
             path: '/trang-chu/detail',
             element: <Detail/>,
         }, {
-            path: '/trang-chu/vietnam',
+            path: '/vietnam',
             element: <HomeType url={"https://www.bongda.com.vn/viet-nam.rss"}/>
         }, {
-            path: '/trang-chu/anh',
+            path: '/anh',
             element: <HomeType url={"https://www.bongda.com.vn/bong-da-anh.rss"}/>
         }, {
-            path: '/trang-chu/y',
+            path: '/y',
             element: <HomeType url={"https://www.bongda.com.vn/bong-da-y.rss"}/>
         }, {
-            path: '/trang-chu/tindaxem',
+            path: '/tindaxem',
             element: <History/>
         }, {
             path: '/v-league',

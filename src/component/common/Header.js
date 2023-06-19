@@ -41,12 +41,12 @@ export function Header() {
                                         </Link>
                                     </li>
                                     <li className="">
-                                        <Link to={'/trang-chu/tin-chuyen-nhuong'}>
+                                        <Link to={'/tin-chuyen-nhuong'}>
                                             <a>Tin chuyển nhượng</a>
                                         </Link>
                                     </li>
                                     <li className="main-menu">
-                                        <Link to={'/trang-chu/vietnam'}>
+                                        <Link to={'/vietnam'}>
                                             <a>Bóng đá Việt Nam</a>
                                         </Link>
                                         <ul className="sub-menu">
@@ -95,7 +95,7 @@ export function Header() {
                                     </li>
 
                                     <li className="main-menu">
-                                        <Link to={'/trang-chu/anh'}>
+                                        <Link to={'/anh'}>
                                             <a>Bóng đá Anh</a>
                                         </Link>
                                         <ul className="sub-menu">
@@ -123,7 +123,7 @@ export function Header() {
                                     </li>
 
                                     <li className="mega-menu-item">
-                                        <Link to={'/trang-chu/y'}>
+                                        <Link to={'/y'}>
                                             <a>Bóng đá Ý</a>
                                         </Link>
 
@@ -135,7 +135,7 @@ export function Header() {
 
                                     </li>
                                     <li className="mega-menu-item">
-                                        <Link to={'/trang-chu/tindaxem'}>
+                                        <Link to={'/tindaxem'}>
                                             <a>Tin đã xem</a>
                                         </Link>
 
