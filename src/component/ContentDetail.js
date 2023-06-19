@@ -205,9 +205,9 @@ const ContentDetail = ({ url }) => {
 
                                         <div className="flex-wr-s-s size-w-0">
                                             <a href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
-                                                className="dis-block f1-s-13 cl0 bg-facebook borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03"
-                                                target="_blank"
-                                                rel="noopener noreferrer">
+                                               className="dis-block f1-s-13 cl0 bg-facebook borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03"
+                                               target="_blank"
+                                               rel="noopener noreferrer">
                                                 <i className="fab fa-facebook-f m-r-7"></i>
                                                 Facebook
                                             </a>

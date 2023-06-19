@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Header from "./common/Header";
 import Footer from "./common/Footer";
+import {Link} from "react-router-dom";
 
 function SavedArticles() {
     // Lấy danh sách bài báo từ localStorage
@@ -22,19 +23,37 @@ function SavedArticles() {
     }, []);
     // Cuộn trang lên đầu khi người dùng nhấp vào nút
     const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({top: 0, behavior: 'smooth'});
     };
+
+    function delArticles() {
+        // Kiểm tra xem local storage có tồn tại không
+        if (localStorage) {
+            // Xoá tất cả các mục đã xem trong local storage
+            localStorage.removeItem('savedArticles');
+
+            console.log('Đã xoá tất cả các bài báo đã xem trong local storage.');
+            // eslint-disable-next-line no-restricted-globals
+            location.reload();
+        } else {
+            console.log('Trình duyệt không hỗ trợ local storage.');
+        }
+    }
+
     return (
         <div>
             <title>Tin đã xem</title>
             <meta charSet="UTF-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <Header></Header>
+            <div className="container p-t-4 p-b-40">
+                <h2 className="p-b-1 ">Tin đã xem</h2>
+                <a className="hov-btn1 trans-03 m-all-7 pagi-active" onClick={delArticles}> Xoá tin đã xem</a>
+            </div>
             <section className="bg0 p-t-70 p-b-55">
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="p-b-80">
-                            <h1>Tin đã xem</h1>
                             <div className="row">
                                 {articles.length > 0 &&
                                     <>
@@ -44,13 +63,13 @@ function SavedArticles() {
                                                     {/* Item latest */}
                                                     <div className="m-b-45">
                                                         <a href={`detail?url=${encodeURIComponent(article.link)}`}
-                                                            className="wrap-pic-w hov1 trans-03">
+                                                           className="wrap-pic-w hov1 trans-03">
                                                             <img src={article.image} alt="IMG"/>
                                                         </a>
                                                         <div className="p-t-16">
                                                             <h5 className="p-b-5">
                                                                 <a href={`detail?url=${encodeURIComponent(article.link)}`}
-                                                                    className="f1-m-3 cl2 hov-cl10 trans-03">
+                                                                   className="f1-m-3 cl2 hov-cl10 trans-03">
                                                                     {article.title}
                                                                 </a>
                                                             </h5>

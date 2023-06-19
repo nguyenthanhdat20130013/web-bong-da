@@ -86,48 +86,48 @@ export function HomeCategory(props){
                 <div className="row">
                     {rssType.length > 0 &&
                         <>
-                    <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                        <div className="m-b-30">
-                            <a onClick={() => add(rssType[0].title)}
-                                href={`detail?url=${encodeURIComponent(rssType[0].link)}`} className="wrap-pic-w hov1 trans-03">
-                                <img src={rssType[0].image} alt="IMG"/>
-                            </a>
-                            <div className="p-t-20">
-                                <h5 className="p-b-5">
+                            <div className="col-sm-6 p-r-25 p-r-15-sr991">
+                                <div className="m-b-30">
                                     <a onClick={() => add(rssType[0].title)}
-                                        href={`detail?url=${encodeURIComponent(rssType[0].link)}`} className="f1-m-3 cl2 hov-cl10 trans-03">
-                                        {rssType[0].title}
+                                       href={`detail?url=${encodeURIComponent(rssType[0].link)}`} className="wrap-pic-w hov1 trans-03">
+                                        <img src={rssType[0].image} alt="IMG"/>
                                     </a>
-                                </h5>
-                                <span className="cl8">
+                                    <div className="p-t-20">
+                                        <h5 className="p-b-5">
+                                            <a onClick={() => add(rssType[0].title)}
+                                               href={`detail?url=${encodeURIComponent(rssType[0].link)}`} className="f1-m-3 cl2 hov-cl10 trans-03">
+                                                {rssType[0].title}
+                                            </a>
+                                        </h5>
+                                        <span className="cl8">
                                     <a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">{rssType[0].pubDate}</a>
                                 </span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </>
-                }
+                        </>
+                    }
                     <div className="col-sm-6 p-r-25 p-r-15-sr991">
                         {rssType.length > 0 &&
                             <>
                                 {rssType.slice(1, 4).map((item, index) => (
-                        <div className="flex-wr-sb-s m-b-30">
-                            <a onClick={() => add(item.title)}
-                                href={`detail?url=${encodeURIComponent(item.link)}`} className="size-w-1 wrap-pic-w hov1 trans-03">
-                                <img src={item.image} alt="IMG"/>
-                            </a>
-                            <div className="size-w-2">
-                                <h5 className="p-b-5">
-                                    <a onClick={() => add(item.title)}
-                                        href={`detail?url=${encodeURIComponent(item.link)}`} className="f1-s-5 cl3 hov-cl10 trans-03">
-                                        {item.title}
-                                    </a>
-                                </h5>
-                                <span className="cl8">
+                                    <div className="flex-wr-sb-s m-b-30">
+                                        <a onClick={() => add(item.title)}
+                                           href={`detail?url=${encodeURIComponent(item.link)}`} className="size-w-1 wrap-pic-w hov1 trans-03">
+                                            <img src={item.image} alt="IMG"/>
+                                        </a>
+                                        <div className="size-w-2">
+                                            <h5 className="p-b-5">
+                                                <a onClick={() => add(item.title)}
+                                                   href={`detail?url=${encodeURIComponent(item.link)}`} className="f1-s-5 cl3 hov-cl10 trans-03">
+                                                    {item.title}
+                                                </a>
+                                            </h5>
+                                            <span className="cl8">
                                     <a href="#" className="f1-s-6 cl8 hov-cl10 trans-03">{item.pubDate}</a>
                                 </span>
-                            </div>
-                        </div>
+                                        </div>
+                                    </div>
                                 ))}
                             </>
                         }

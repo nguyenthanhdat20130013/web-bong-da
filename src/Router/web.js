@@ -22,7 +22,7 @@ export const webRouter=createBrowserRouter([{
             path:'/trang-chu',
             element: <Home url="https://www.bongda.com.vn/feed.rss"/>
         },
-         {
+        {
             path: '/detail',
             element: <Detail/>,
         },
