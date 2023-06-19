@@ -8,8 +8,7 @@ import Footer from "./common/Footer";
 const Detail = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
-    const url = 'https://api.allorigins.win/raw?url=' + queryParams.get('url');
-    const [articleTitle, setArticleTitle] = useState('');
+    const url =  queryParams.get('url');
     useEffect(() => {
     }, []);
 
