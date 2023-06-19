@@ -1,12 +1,6 @@
-export const  loadproduct=(data)=>{
+export const  loadnews=(data)=>{
     return {
-        type: 'products.load',
-        payload:data
-    }
-}
-export const addCart=(data)=>{
-    return{
-        type: 'cart.add',
+        type: 'news.load',
         payload:data
     }
 }
